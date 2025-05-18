@@ -9,34 +9,28 @@ editor: visual
 library(dplyr)
 ```
 
-## Importing Database 1:
+# Put our topic here!
 
-#### This study examines 394 globally recognized digital games (1972–2020) to assess how mental health is represented, using expert and documental analysis. It categorizes content based on DSM-V disorders and evaluates perceptions from players and scientific literature.
+## Importing Database 1: [The Effect of Screentime on the Mental Health of Children](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1WWCA5)
+
+This database analyzes 2020 NSCH data to examine the correlation between weekday screentime and mental health treatment among children aged 0–17. Findings show that increased screentime is associated with higher instances of mental health treatment, especially among adolescents (14–17 years old), where those needing treatment most often reported four or more hours of screentime.
 
 ```{r}
-database_1 <- read.csv("listagem games- tania-bks-TaniaRibeiro.csv")
+database_1 <- read.csv("First_database.csv")
+
+# remove the line below later... just for visualizing the database
 sample_n(database_1, 6) 
 ```
 
-## Importing Database 2:
-```{r}
+## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
-```
+#### [Original study can be found here](https://osf.io/vnbxk/)
 
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+This dataset consists of data collected as a part of a survey among gamers worldwide. The questionnaire asked questions that psychologists generally ask people who are prone to anxiety, social phobia, and less to no life satisfaction. The questionnaire consists of several set of questions as asked as a part of psychological study. The original data was collated by Marian Sauter and Dejan Draschkow.
 
 ```{r}
-1 + 1
+database_2 <- read.csv("Second_database.csv")
+
+# remove the line below later... just for visualizing the database
+sample_n(database_2, 6) 
 ```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
