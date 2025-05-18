@@ -1,0 +1,42 @@
+---
+title: "INFO201 Final Project"
+format: html
+editor: visual
+---
+
+```{r}
+# install.packages("dplyr")
+library(dplyr)
+```
+
+## Importing Database 1:
+
+#### This study examines 394 globally recognized digital games (1972–2020) to assess how mental health is represented, using expert and documental analysis. It categorizes content based on DSM-V disorders and evaluates perceptions from players and scientific literature.
+
+```{r}
+database_1 <- read.csv("listagem games- tania-bks-TaniaRibeiro.csv")
+sample_n(database_1, 6) 
+```
+
+## Importing Database 2:
+```{r}
+
+```
+
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
