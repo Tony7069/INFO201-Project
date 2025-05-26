@@ -9,11 +9,13 @@ editor: visual
 library(dplyr)
 ```
 
-# Put our topic here!
+# Gaming effect on mental health, anxious level, and working efficiency in US
 
 ## Importing Database 1: [The Effect of Screentime on the Mental Health of Children](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1WWCA5)
 
 This database analyzes 2020 NSCH data to examine the correlation between weekday screentime and mental health treatment among children aged 0–17. Findings show that increased screentime is associated with higher instances of mental health treatment, especially among adolescents (14–17 years old), where those needing treatment most often reported four or more hours of screentime.
+
+Age: Integer, age Playing.Hours: Integer, hour participants spent on electronic device Productive.Time: Integer, hour participants spent on work or study Feel.After: String: "Good", "Tired", "Unmotivated" Mental.Harm: Catagory: No, Yes
 
 ```{r}
 database_1 <- read.csv("First_database.csv")
@@ -21,6 +23,9 @@ database_1 <- read.csv("First_database.csv")
 # remove the line below later... just for visualizing the database
 sample_n(database_1, 6) 
 ```
+
+1.  filter the age (include only age over 18 years old)
+2.  ggplot bar chart to compare the playing hours for No mental harm and Yes mental harm
 
 ## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
@@ -34,3 +39,7 @@ database_2 <- read.csv("Second_database.csv")
 # remove the line below later... just for visualizing the database
 sample_n(database_2, 6) 
 ```
+
+1.  Filter the residency first
+2.  Group by play style in ggplot (scatter plot possibly)
+3.  Summary statistics of anxious level questions
