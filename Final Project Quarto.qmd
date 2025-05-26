@@ -7,6 +7,7 @@ editor: visual
 ```{r}
 # install.packages("dplyr")
 library(dplyr)
+library(ggplot2)
 ```
 
 # Gaming effect on mental health, anxious level, and working efficiency in US
@@ -25,7 +26,22 @@ sample_n(database_1, 6)
 ```
 
 1.  filter the age (include only age over 18 years old)
+```{r}
+DB1_age_above_18 <- database_1 |> 
+  filter(Age >= 18)
+
+```
+
 2.  ggplot bar chart to compare the playing hours for No mental harm and Yes mental harm
+```{r}
+DB1_age_above_18 |>
+  ggplot(aes(x = Mental.Harm, y = Playing.Hours, fill = Mental.Harm)) +
+  geom_bar(stat = "summary", fun = "mean") +   # using stat to calculate mean for playing hours
+  labs(title = "Average Playing Hours and Mental Harm",
+       x = "Mental Harm (Y/N)",
+       y = "Average Playing Hours")
+```
+3. result conclusion 1:
 
 ## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
