@@ -26,6 +26,7 @@ sample_n(database_1, 6)
 ```
 
 1.  filter the age (include only age over 18 years old)
+
 ```{r}
 DB1_age_above_18 <- database_1 |> 
   filter(Age >= 18)
@@ -33,6 +34,7 @@ DB1_age_above_18 <- database_1 |>
 ```
 
 2.  ggplot bar chart to compare the playing hours for No mental harm and Yes mental harm
+
 ```{r}
 DB1_age_above_18 |>
   ggplot(aes(x = Mental.Harm, y = Playing.Hours, fill = Mental.Harm)) +
@@ -41,7 +43,9 @@ DB1_age_above_18 |>
        x = "Mental Harm (Y/N)",
        y = "Average Playing Hours")
 ```
-3. ggplot bar chart to compare the playing hours for good and unmotivated
+
+3.  ggplot bar chart to compare the playing hours for good and unmotivated
+
 ```{r}
 DB1_age_above_18 |>
   ggplot(aes(x = Feel.After, y = Playing.Hours, fill = Feel.After)) +
@@ -51,8 +55,7 @@ DB1_age_above_18 |>
        y = "Average Playing Hours")
 ```
 
-
-4. result conclusion 1:
+4.  result conclusion 1:
 
 ## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
@@ -70,3 +73,5 @@ sample_n(database_2, 6)
 1.  Filter the residency first
 2.  Group by play style in ggplot (scatter plot possibly)
 3.  Summary statistics of anxious level questions
+
+HERE IS A UPDATE TEST
