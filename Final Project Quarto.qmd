@@ -16,7 +16,10 @@ library(ggplot2)
 
 This database analyzes 2020 NSCH data to examine the correlation between weekday screentime and mental health treatment among children aged 0–17. Findings show that increased screentime is associated with higher instances of mental health treatment, especially among adolescents (14–17 years old), where those needing treatment most often reported four or more hours of screentime.
 
-Age: Integer, age Playing.Hours: Integer, hour participants spent on electronic device Productive.Time: Integer, hour participants spent on work or study Feel.After: String: "Good", "Tired", "Unmotivated" Mental.Harm: Catagory: No, Yes
+Age: Integer, age Playing.
+Hours: Integer, hour participants spent on electronic device Productive.
+Time: Integer, hour participants spent on work or study Feel.
+After: String: "Good", "Tired", "Unmotivated" Mental.Harm: Catagory: No, Yes
 
 ```{r}
 database_1 <- read.csv("First_database.csv")
@@ -55,7 +58,7 @@ DB1_age_above_18 |>
        y = "Average Playing Hours")
 ```
 
-4.  result conclusion 1:
+4.  result conclusion 1: 
 
 ## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
@@ -73,5 +76,14 @@ sample_n(database_2, 6)
 1.  Filter the residency first
 2.  Group by play style in ggplot (scatter plot possibly)
 3.  Summary statistics of anxious level questions
+4.  Calculate the GAD-7 scores
 
-HERE IS A UPDATE TEST
+```{r}
+DB2_residence_USA <- database_2 |>
+  filter(Residence == "USA")
+```
+
+```{r}
+
+```
+
