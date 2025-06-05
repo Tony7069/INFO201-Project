@@ -38,26 +38,35 @@ DB1_age_above_18 <- database_1 |>
 2.  ggplot bar chart to compare the playing hours for No mental harm and Yes mental harm
 
 ```{r}
+#| fig.alt: "The bar graph catagorize mental harm and compare it to the average playing hours of player. There is a clear trend that for players who said 'yes' or mental harm, their average playing hours is much higher than those who said 'no'
 DB1_age_above_18 |>
   ggplot(aes(x = Mental.Harm, y = Playing.Hours, fill = Mental.Harm)) +
   geom_bar(stat = "summary", fun = "mean") +   # using stat to calculate mean for playing hours
   labs(title = "Average Playing Hours and Mental Harm",
        x = "Mental Harm (Y/N)",
        y = "Average Playing Hours")
+
 ```
 
 3.  ggplot bar chart to compare the playing hours for good and unmotivated
 
 ```{r}
-DB1_age_above_18 |>
+#| fig.alt: "This bar graph compares the feeling (String) of players after specific amount of playing time. There is a clear trned that for most players who play more than 3 hours on average per day, they tend to feel more 'unmotivated', and for those who play less than an hour on average, they tend to feel either 'good' or 'tired'
+DB1_graph <- DB1_age_above_18 |>
   ggplot(aes(x = Feel.After, y = Playing.Hours, fill = Feel.After)) +
   geom_bar(stat = "summary", fun = "mean") +   # using stat to calculate mean for playing hours
   labs(title = "Average Playing Hours and feeling after",
        x = "Feeling After Game",
        y = "Average Playing Hours")
+
+ggplotly(DB1_graph)
 ```
 
-4.  result conclusion 1:
+4.  Data Result
+Young adults who report playing video games for 2 - 3 hours (which can be considered "too long") on average during weekdays have a much higher percentage of reporting “yes” for mental harm, and a much higher percentage of reporting “unmotivated” or “tired”. This suggests a clear trend that longer screen time has a passive impact on health, especially for teenagers. 
+
+This database also showed that, on average, if a player plays for less than an hour daily, there is no significant impact on mental health status (for the players who play games for on average one hour, they report “no” for mental harm). In fact, people report that they feel “good” after an hour of gaming which suggests there might be benefit to emotion if players restrict playing time to under an hour. 
+
 
 ## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
@@ -89,18 +98,22 @@ database_2 |>
     (str_detect(tolower(Playstyle), "mix") | str_detect(tolower(Playstyle), "both")) ~ "Mix of Both",
     (str_detect(tolower(Playstyle), "friends") | str_detect(tolower(Playstyle), "One person")) ~ "Friends",
     TRUE ~ "Solo"
-  )) |>
+  ))
   
 # Makes the graph
+#| fig.alt: "Faceted histogram of different playstles (Solo, with Friends, or mix of both), those who perfer to play solo show higher levels of anxiety than others"
+playstyle_vs_GADT <- database_2 |> 
   ggplot(aes(x = GAD_T, fill = multi)) +
   geom_histogram() +
   facet_wrap(~multi)+
   labs(
     x = "Reported Anxiety score",
-    y = "",
+    y = "Amount of people",
     fill = "Playstyle",
-    title = "High anxiety levels seem to occur less in people who prefer to play alongside friends"
+    title = "High anxiety levels seem to occur less in people who prefer to play alongside friends",
+    caption = "Data available at: httos://losf.io/vnbxk/files/osfstorage?view_only="
   )
+
 ```
 
 3.  Summary statistics of anxious level questions
