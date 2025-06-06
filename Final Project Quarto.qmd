@@ -1,100 +1,117 @@
 ---
 title: "INFO201 Final Project"
+author: "Xinyue Li"
 format: html
 editor: visual
 ---
 
 ```{r}
+#| echo: false
+#| results: 'hide'
+#| message: false
+#| warning: false
 # install.packages("dplyr")
 library(dplyr)
 library(ggplot2)
 library(stringr)
-
+library(plotly)
 ```
 
 # Gaming effect on mental health, anxious level, and working efficiency in US
 
 ## Importing Database 1: [The Effect of Screentime on the Mental Health of Children](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1WWCA5)
 
-This database analyzes 2020 NSCH data to examine the correlation between weekday screentime and mental health treatment among children aged 0–17. Findings show that increased screentime is associated with higher instances of mental health treatment, especially among adolescents (14–17 years old), where those needing treatment most often reported four or more hours of screentime.
+"This database analyzes 2020 NSCH data to examine the correlation between weekday screentime and mental health treatment among children aged 0–17. Findings show that increased screentime is associated with higher instances of mental health treatment, especially among adolescents (14–17 years old), where those needing treatment most often reported four or more hours of screentime."
 
-Age: Integer, age Playing.Hours: Integer, hour participants spent on electronic device Productive.Time: Integer, hour participants spent on work or study Feel.After: String: "Good", "Tired", "Unmotivated" Mental.Harm: Catagory: No, Yes
+### Database_1 Description:
+
+-   **Age**: Integer — age\
+-   **Playing.Hours**: Integer — hours participants spent on electronic devices\
+-   **Productive.Time**: Integer — hours participants spent on work or study\
+-   **Feel.After**: String — "Good", "Tired", "Unmotivated"\
+-   **Mental.Harm**: Category — No, Yes
 
 ```{r}
+#| echo: false
 database_1 <- read.csv("First_database.csv")
 
 # remove the line below later... just for visualizing the database
 sample_n(database_1, 6) 
 ```
 
-1.  filter the age (include only age over 18 years old)
+### Database 1 Analyzation:
+
+filter the age: include only age over 18 years old
 
 ```{r}
+#| echo: false
 DB1_age_above_18 <- database_1 |> 
   filter(Age >= 18)
 
 ```
 
-2.  ggplot bar chart to compare the playing hours for No mental harm and Yes mental harm
+#### ggplot bar chart to compare the playing hours for "No" mental harm and "Yes" mental harm
 
 ```{r}
-#| fig.alt: "The bar graph catagorize mental harm and compare it to the average playing hours of player. There is a clear trend that for players who said 'yes' or mental harm, their average playing hours is much higher than those who said 'no'
-DB1_age_above_18 |>
+#| echo: false
+#| fig.alt: "The bar graph catagorize mental harm and compare it to the average playing hours of player. There is a clear trend that for players who said 'yes' or mental harm, their average playing hours is much higher than those who said 'no'"
+DB1_graph_hours_vs_mentalHarm <- DB1_age_above_18 |>
   ggplot(aes(x = Mental.Harm, y = Playing.Hours, fill = Mental.Harm)) +
   geom_bar(stat = "summary", fun = "mean") +   # using stat to calculate mean for playing hours
   labs(title = "Average Playing Hours and Mental Harm",
        x = "Mental Harm (Y/N)",
-       y = "Average Playing Hours")
+       y = "Average Playing Hours") 
+
+ggplotly(DB1_graph_hours_vs_mentalHarm)
 
 ```
 
-3.  ggplot bar chart to compare the playing hours for good and unmotivated
+#### ggplot bar chart to compare the playing hours for "good" and "unmotivated"
 
 ```{r}
-#| fig.alt: "This bar graph compares the feeling (String) of players after specific amount of playing time. There is a clear trned that for most players who play more than 3 hours on average per day, they tend to feel more 'unmotivated', and for those who play less than an hour on average, they tend to feel either 'good' or 'tired'
-DB1_graph <- DB1_age_above_18 |>
+#| echo: false
+#| fig.alt: "This bar graph compares the feeling (String) of players after specific amount of playing time. There is a clear trned that for most players who play more than 3 hours on average per day, they tend to feel more 'unmotivated', and for those who play less than an hour on average, they tend to feel either 'good' or 'tired'"
+DB1_graph_feelingAfter <- DB1_age_above_18 |>
   ggplot(aes(x = Feel.After, y = Playing.Hours, fill = Feel.After)) +
   geom_bar(stat = "summary", fun = "mean") +   # using stat to calculate mean for playing hours
   labs(title = "Average Playing Hours and feeling after",
        x = "Feeling After Game",
        y = "Average Playing Hours")
 
-ggplotly(DB1_graph)
+ggplotly(DB1_graph_feelingAfter)
 ```
 
-4.  Data Result
-Young adults who report playing video games for 2 - 3 hours (which can be considered "too long") on average during weekdays have a much higher percentage of reporting “yes” for mental harm, and a much higher percentage of reporting “unmotivated” or “tired”. This suggests a clear trend that longer screen time has a passive impact on health, especially for teenagers. 
+### Database_1 Conclusion:
 
-This database also showed that, on average, if a player plays for less than an hour daily, there is no significant impact on mental health status (for the players who play games for on average one hour, they report “no” for mental harm). In fact, people report that they feel “good” after an hour of gaming which suggests there might be benefit to emotion if players restrict playing time to under an hour. 
+Data Result: Young adults who report playing video games for 2 - 3 hours (which can be considered "too long") on average during weekdays have a much higher percentage of reporting “yes” for mental harm, and a much higher percentage of reporting “unmotivated” or “tired”. This suggests a clear trend that longer screen time has a passive impact on health, especially for teenagers.
 
+This database also showed that, on average, if a player plays for less than an hour daily, there is no significant impact on mental health status (for the players who play games for on average one hour, they report “no” for mental harm). In fact, people report that they feel “good” after an hour of gaming which suggests there might be benefit to emotion if players restrict playing time to under an hour.
 
 ## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
 #### [Original study can be found here](https://osf.io/vnbxk/)
 
+### Database_2 Description:
+
 This dataset consists of data collected as a part of a survey among gamers worldwide. The questionnaire asked questions that psychologists generally ask people who are prone to anxiety, social phobia, and less to no life satisfaction. The questionnaire consists of several set of questions as asked as a part of psychological study. The original data was collated by Marian Sauter and Dejan Draschkow.
 
 ```{r}
+#| echo: false
 database_2 <- read.csv("Second_database.csv")
 
 # remove the line below later... just for visualizing the database
 sample_n(database_2, 6) 
 ```
 
-2.  Group by play style
+### Database_2 Analyzation:
+
+#### Playstyle VS GADT Histogram
 
 ```{r}
-database_2 |>
-  distinct(Playstyle)
-```
-
-# Playstyle VS GADT Histogram
-
-```{r}
-
+#| echo: false
 # Assigns a simple Multiplayer or Singleplayer label to each row
-database_2 |>
-  mutate(multi = case_when(
+database_2 <- database_2 |>
+  mutate(multiORsingle = case_when(
     (str_detect(tolower(Playstyle), "mix") | str_detect(tolower(Playstyle), "both")) ~ "Mix of Both",
     (str_detect(tolower(Playstyle), "friends") | str_detect(tolower(Playstyle), "One person")) ~ "Friends",
     TRUE ~ "Solo"
@@ -103,9 +120,9 @@ database_2 |>
 # Makes the graph
 #| fig.alt: "Faceted histogram of different playstles (Solo, with Friends, or mix of both), those who perfer to play solo show higher levels of anxiety than others"
 playstyle_vs_GADT <- database_2 |> 
-  ggplot(aes(x = GAD_T, fill = multi)) +
+  ggplot(aes(x = GAD_T, fill = multiORsingle)) +
   geom_histogram() +
-  facet_wrap(~multi)+
+  facet_wrap(~multiORsingle)+
   labs(
     x = "Reported Anxiety score",
     y = "Amount of people",
@@ -114,11 +131,13 @@ playstyle_vs_GADT <- database_2 |>
     caption = "Data available at: httos://losf.io/vnbxk/files/osfstorage?view_only="
   )
 
+ggplotly(playstyle_vs_GADT)
 ```
 
-3.  Summary statistics of anxious level questions
+#### Summary statistics of anxious level questions
 
 ```{r}
+#| echo: false
 multi_vs_single <- database_2 |>
   mutate(Playstyle_group = case_when(
     str_detect(tolower(Playstyle), "multiplayer") ~ "Multiplayer",
@@ -136,7 +155,10 @@ multi_vs_single <- database_2 |>
 multi_vs_single
 ```
 
+#### t-test:
+
 ```{r}
+#| echo: false
 data_for_test <- database_2 |>
   mutate(Playstyle_group = case_when(
     str_detect(tolower(Playstyle), "multiplayer") ~ "Multiplayer",
@@ -148,3 +170,28 @@ data_for_test <- database_2 |>
 t_test_result <- t.test(GAD_T ~ Playstyle_group, data = data_for_test)
 t_test_result
 ```
+
+### Database_2 conclusion (with coefficient of correlation included):
+
+The resulted p-value is 0.01314, which is less then usual alpha value 0.05, as a result, we just prove that there is a correlation between playstyle and anxious level (GAD-T)
+
+coefficient of correlation: Mean, total population, and standard deviation together can be use to calculate the coefficient of correlation, and those information are provided above in the summary statistic table. The t-test already proves that there is correlation between GAD-T level and the playstyle (multi/single) of players, but the question is, how are they related. The correlation of coefficient gives the answer. If the coefficient is close to 1, there is a strong positive correlation, if coefficient is close to -1, there is a strong negative correlation, if the coefficient is close to 0, there is a weak correlation. Positive coefficient means single players have lower anxious level and negative coefficient means multi players have lower anxious level in our case study.
+
+```{r}
+#| echo: false
+n_multi <- 12529
+n_single <- 935
+mean_multi <- 5.182936
+mean_single <- 5.601070
+sd_multi <- 4.691290
+sd_single <- 4.984795
+n_total <- n_multi + n_single
+s_pooled <- sqrt( ((n_multi - 1) * sd_multi^2 + (n_single - 1) * sd_single^2) / (n_total - 2) )
+coefficient <- (mean_multi - mean_single) / s_pooled * sqrt(n_multi * n_single / (n_total * (n_total - 1)))
+print('coefficient of correlation is: ')
+coefficient
+```
+
+The coefficient calcualted after plug in data into the equation is -0.023, which means weak negative relationship. In conclusion, there is a slight trend that players who plays single have higher GAD-T anxious level then players who play together.
+
+## Narrative and overall conclusion:
