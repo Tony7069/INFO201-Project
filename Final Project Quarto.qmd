@@ -19,6 +19,8 @@ library(plotly)
 
 # Gaming effect on mental health, anxious level, and working efficiency in US
 
+There has always been a negative stigma around video games, critics claiming that they harm cognitive development and mental health. Media and health organizations warn of the potential harms, like addiction, depression, and social isolation. Yet, gaming remains one of the largest entertainment industries with over 2 billion gamers worldwide and a projected revenue of $250 billion by the end of 2025. Given this massive influence, it is crucial to separate the fact from mindless fear-mongering: Do video games truly damage mental health, or can they be beneficial? This question is vital for the parents, policymakers, and mental health professionals who need evidence-based guidance. Additionally, game developers can use the findings from this research to design experiences that promote well-being rather than harm in their games.
+
 ## Importing Database 1: [The Effect of Screentime on the Mental Health of Children](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1WWCA5)
 
 "This database analyzes 2020 NSCH data to examine the correlation between weekday screentime and mental health treatment among children aged 0–17. Findings show that increased screentime is associated with higher instances of mental health treatment, especially among adolescents (14–17 years old), where those needing treatment most often reported four or more hours of screentime."
@@ -83,9 +85,8 @@ ggplotly(DB1_graph_feelingAfter)
 
 ### Database_1 Conclusion:
 
-Data Result: Young adults who report playing video games for 2 - 3 hours (which can be considered "too long") on average during weekdays have a much higher percentage of reporting “yes” for mental harm, and a much higher percentage of reporting “unmotivated” or “tired”. This suggests a clear trend that longer screen time has a passive impact on health, especially for teenagers.
+Our database of the effect of screentime on the mental health of children showed that a higher average playtime causes mental harm, with an average of 3 hours of playtime being the threshold for some level of mental harm (responds “yes” for mental harm) occurring. We were also able to find that a higher playtime average also caused more players to be “unmotivated”, with once again 3 hours being that threshold, compared to feeling either good or tired. However this data set also showed us that if the players only played for about 1 hour, they reported positive results (most players with playing hours under 1.5 hours report “no” for mental harm and report “good” for their feeling after game), indicating that a moderate amount of playtime/screentime can be beneficial for a gamer’s mental health. 
 
-This database also showed that, on average, if a player plays for less than an hour daily, there is no significant impact on mental health status (for the players who play games for on average one hour, they report “no” for mental harm). In fact, people report that they feel “good” after an hour of gaming which suggests there might be benefit to emotion if players restrict playing time to under an hour.
 
 ## Importing Database 2: [Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
 
@@ -194,4 +195,30 @@ coefficient
 
 The coefficient calcualted after plug in data into the equation is -0.023, which means weak negative relationship. In conclusion, there is a slight trend that players who plays single have higher GAD-T anxious level then players who play together.
 
-## Narrative and overall conclusion:
+From our database on online gaming anxiety, we were able to conclude that there is a correlation between playstyle and anxiety level (GAD-T). Our calculated p-value was 0.01314, of single-player games versus multiple-player games, lower than a typical average alpha value of 0.05, which gives strong evidence of the correlation. We were also able to calculate a correlation coefficient of -0.023 for a correlation between single-player and multiplayer games, having a lower anxiety level. Even though the coefficient of correlation is close to 0, which usually suggests weak or no linear correlation, our sample size is large (with more than 20000 participants), and given the small p-value, this coefficient is meaningful. The negative correlation suggests that multiplayer games (especially competitive ones) may heighten stress.
+
+### Outside research building on our data:
+Now, how does our data line up with some other research that has been done? The first point that excessive playtimes cause negative effects is true. Multiple studies have shown that excessive gaming, especially online games, can cause Internet Gaming Disorder (IGD), a condition associated with depression, social anxiety, hostility, withdrawal/craving, and loss of control. An article from Harvard Health Publishing mentions that “between 0.3% and 1.0% of Americans might have an internet gaming disorder.” While that number is not large, it is still a very real condition that should be considered if one is to be gaming for prolonged periods. An article from WellPower also mentions that excessive gaming can have similar effects to addiction, such as “compulsive use, lack of enjoyment in use, reduced function in one’s life, higher levels of distraction, problems with relationship and employment, and more.” This aligns with our data, which has reported negative effects on mental health due to higher average playtimes. However, what about the positive effects? For one, gaming can have some health benefits just through playing. An article from the Cleveland Clinic mentions that “visuospatial effects, like hand-eye coordination, and directed attention tend to get a little better when we’re playing video games.” This makes sense as all video games require actions on the screen to be controlled with means other than moving the body physically in the way on screen (excluding VR games, of course). Another benefit is mentioned in an article from the University of Oxford, where they say that a study “suggests that experiences of competence and social connections with others through play may contribute to people’s well-being.” This does align with our data, as we found that people who either play single-player games or games with friends have lower reported anxiety scores, as opposed to competitive multiplayer games.
+
+There are both technical and ethical limitations that apply to this data. First is that the technical limitations of the data include its reliance on self-reported metrics, which in any survey is subject to bias. Certain responders may and could underreport negative emotions or exaggerate their playtimes. Not only this, the data shows associations, and cannot directly prove that gaming directly caused any mental health changes. There is also the concern that our data could skew towards certain demographics, and the findings may not be exactly generalizable. Concerning ethical limitations, while the data is anonymized, researchers must be cautious when interpreting patterns, as linking behavior and mental health while avoiding stigmatizing a certain group or activity is crucial.
+
+### Conclusion: 
+Our data shows that a moderate amount of gaming, typically an hour or less a day, can benefit mental health, enhancing relaxation, cognitive skills, and even social connection. However, that excessive play, three or more hours a day, as well as competitive multiplayer games, may contribute to anxiety and reduced motivation. We conclude that the effect of video games and the impact they make depends on how we, as players, engage with them. With mindful usage, we have shown that they can be a positive tool for entertainment, skill-building, and even mental well-being. 
+
+#### Tools used: 
+- **Co-authors**: Kazu Denny, Aydin Khann
+- **Basic Tools**: 
+  - filter()
+  - summarise()
+- **Intermediate Tools**: 
+  - Coefficient of correlation calculation
+  - t-test
+  - ggplotly animated graph
+- **Dataset 1**: [Harvard Dataverse – DOI:10.7910/DVN/1WWCA5](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1WWCA5)
+- **Dataset 2**: [Kaggle – Online Gaming Anxiety Data](https://www.kaggle.com/datasets/divyansh22/online-gaming-anxiety-data/data)
+- **Outside Sources**:
+  - [Harvard Health Blog: The health effects of too much gaming](https://www.health.harvard.edu/blog/the-health-effects-of-too-much-gaming-2020122221645)
+  - [WellPower Blog: The surprising truth about video games and mental health](https://www.wellpower.org/blog/the-surprising-truth-about-video-games-and-mental-health/)
+  - [Cleveland Clinic: Are Video Games Good for You?](https://health.clevelandclinic.org/are-video-games-good-for-you)
+  - [Oxford University: Gaming may not be as bad as you think](https://www.ox.ac.uk/news/arts-blog/gaming-may-not-be-bad-you-think-oxford-research)
+
